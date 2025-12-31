@@ -4,5 +4,5 @@ assets/img/
 .env
 ./legacy
 tree.txt
-./vendor
+/vendor
 public/assets/fonts
