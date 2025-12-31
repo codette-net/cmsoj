@@ -1,0 +1,10 @@
+  {% extends CMSOJ/Views/admin/main.html %}
+
+{% block title %} Accounts {% endblock %}
+
+{% block content %}
+
+<h1>Profile</h1>
+<h2>{{ $account['display_name'] }} | {{ $account['email'] }}</h2>
+
+{% endblock %}

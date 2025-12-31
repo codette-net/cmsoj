@@ -1,0 +1,32 @@
+{% extends CMSOJ/Views/admin/main.html %}
+
+{% block title %}
+    {{ $title ?? 'Dashboard' }}
+{% endblock %}
+
+
+{% block page %}
+<div class="dashboard-grid">
+
+    <div class="stat-box">
+        <h3>Total Accounts</h3>
+        <span><?= $totalAccounts ?></span>
+    </div>
+
+    <div class="stat-box">
+        <h3>Total Messages</h3>
+        <span><?= $totalMessages ?></span>
+    </div>
+
+    <div class="stat-box">
+        <h3>Unread Messages</h3>
+        <span><?= $unreadMessages ?></span>
+    </div>
+
+    <div class="stat-box">
+        <h3>Total Events</h3>
+        <span><?= $totalEvents ?></span>
+    </div>
+
+</div>
+{% endblock %}

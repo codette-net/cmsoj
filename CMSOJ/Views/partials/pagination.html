@@ -1,0 +1,18 @@
+<?php if (!empty($meta) && $meta['pages'] >= 1): ?>
+
+<nav class="pagination" aria-label="Pagination" style="margin-left: 20rem;">
+  <ul>
+    <?php for ($p = 1; $p <= $meta['pages']; $p++): ?>
+      <li>
+        <?php if ($p === $meta['page']): ?>
+          <span aria-current="page"><?= $p ?></span>
+        <?php else: ?>
+          <a href="?<?= http_build_query(array_merge($query, ['page' => $p])) ?>">
+            <?= $p ?>
+          </a>
+        <?php endif; ?>
+      </li>
+    <?php endfor; ?>
+  </ul>
+</nav>
+<?php endif; ?>

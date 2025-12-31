@@ -1,0 +1,8 @@
+config.php
+assets/img/
+.htaccess
+.env
+./legacy
+tree.txt
+./vendor
+public/assets/fonts

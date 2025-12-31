@@ -1,0 +1,183 @@
+{
+  "regular": [
+    {
+      "day": 0, 
+      "status": "open",
+      "open": "18:30", 
+      "close": "02:00"
+    },
+    {
+      "day": 1, 
+      "status": "closed",
+      "open": null, 
+      "close": null
+    },
+    {
+      "day": 2, 
+      "status": "closed",
+      "open": null, 
+      "close": null
+    },
+    {
+      "day": 3, 
+      "status": "open",
+      "open": "18:30", 
+      "close": "02:00"
+    },
+    {
+      "day": 4, 
+      "status": "open",
+      "open": "18:30", 
+      "close": "02:00"
+    },
+    { 
+      "day": 5, 
+      "status": "open",
+      "open": "18:30", 
+      "close": "02:00"
+    },
+    {
+      "day": 6, 
+      "status": "open",
+      "open": "18:30",
+      "close": "02:00"
+    } 
+    
+  ],
+  "exceptions": [
+    
+    {
+      "date": "2025-10-5", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2024-10-16", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2024-11-30", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-11-1", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-12-25", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-12-24", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2024-12-30", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-12-31", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-1", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-2", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-3", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-4", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-5", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-8", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-9", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-10", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-11", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-12", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2026-01-13", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-07-08", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-08-05", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    },
+    {
+      "date": "2025-05-08", 
+      "status": "closed",
+      "open": null,
+      "close": null
+    }
+           
+  ]
+}

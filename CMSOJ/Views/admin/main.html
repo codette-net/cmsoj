@@ -1,0 +1,24 @@
+{% extends CMSOJ/Views/admin/layout.html %}
+
+{% block nav %}
+<div class="admin-wrapper">
+    <aside class="admin-sidebar">
+        {% include CMSOJ/Views/admin/partials/sidebar.html %}
+    </aside>
+{% endblock %}
+
+{% block content %}
+
+    <main class="admin-content">
+        {% include CMSOJ/Views/admin/partials/header.html %}
+
+        <section class="admin-page">
+            {% yield page %}
+        </section>
+    </main>
+</div> 
+{% endblock %}
+
+{% block footer %}
+<a id="scrolltop" href="#" title="Back to top" style="display:none;"></a>
+{% endblock %}

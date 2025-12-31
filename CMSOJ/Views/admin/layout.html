@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% yield title %} | CMSOJ </title>
+  {% yield css %}
+</head>
+
+<body class="{{ $body_class ?? 'admin-main' }}">
+  {% component 'flash' %}
+
+  {% yield nav %}
+
+  {% yield content %}
+
+  {% yield footer %}
+  {% yield scripts %}
+</body> 
+</html>
+
+{% block css %}
+<link rel="stylesheet" href='<?= \CMSOJ\Template::asset("/assets/css/classless.css") ?>' />
+<link rel="stylesheet" href='<?= \CMSOJ\Template::asset("/assets/css/admin_new.css") ?>' />
+
+<noscript>
+  <link rel="stylesheet" href='{{ "/assets/css/noscript.css" }}' />
+</noscript>
+{% endblock %}
+
+{% block footer %}
+<a id="scrolltop" ...></a>
+{% endblock %}
+
+{% block scripts %}
+<!-- JS includes -->
+ <script>
+setTimeout(() => {
+  document.querySelectorAll('.flash').forEach(el => el.remove());
+}, 3000);
+</script>
+
+{% endblock %}

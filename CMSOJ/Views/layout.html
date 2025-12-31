@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Manezinho | {% yield title %} </title>
+  {% yield meta %}
+  {% yield css %}
+  <!-- here is the end of head  -->
+</head>
+
+
+<body class="">
+  {% yield nav %}
+
+  {% yield content %}
+
+  {% yield footer %}
+  {% yield scripts %}
+</body>
+
+</html>
+
+{% block meta %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href='{{ "/assets/css/main.css" }}' />
+<link rel="stylesheet" href='{{ "/assets/css/components.css" }}'>
+<link rel="stylesheet" href='{{ "/assets/css/style.css" }}'>
+<noscript>
+  <link rel="stylesheet" href='{{ "/assets/css/noscript.css" }}' />
+</noscript>
+{% endblock %}
+
+{% block footer%}
+<a id="scrolltop" href="#" title="Back to top" style="display: none;"></a>
+{% endblock %}
+
+{% block scripts %}
+<script src='{{ "/assets/js/main.js" }}''></script>
+<script src='{{ "/assets/js/reservation.js" }}''></script>
+{% endblock %}

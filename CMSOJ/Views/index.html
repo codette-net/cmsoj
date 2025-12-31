@@ -1,0 +1,23 @@
+{% extends CMSOJ/Views/layout.html %}
+
+{% block title %} {{ $title }} {% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Welcome to Art Restaurant Manezinho, a unique dining experience in São Jorge, Azores. Enjoy exquisite cuisine in an artistic setting. Book your table now!">
+{% endblock %}
+
+{% block content %}
+
+{% partial 'CMSOJ/Views/partials/nav.html'  %}
+<h1>CMSOJ</h1>
+
+{% endblock %}
+
+{% partial 'footer' %}  
+
+{% block scripts %}
+@parent
+<script src="/assets/js/imgscroller.js"></script>
+<script src="/assets/js/wordslider.js"></script>
+{% endblock %}
+

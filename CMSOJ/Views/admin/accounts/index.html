@@ -1,0 +1,34 @@
+{% extends CMSOJ/Views/admin/main.html %}
+
+{% block title %} Accounts {% endblock %}
+
+{% block page %}
+<header class="content-header">
+<h2>Accounts</h2>
+{% if (\CMSOJ\Helpers\Permissions::can('accounts.create')) : %}
+<div class="actions">
+    <a href="/admin/accounts/create" class="btn btn-primary">+ Create Account</a>
+</div>
+</header>
+{% endif %}
+
+
+{% component 'admin/search', [
+    'query' => $query,
+    'meta'  => $meta
+] %}
+
+{% component 'admin/table', [
+'headers' => $headers,
+'rows' => $rows,
+'sortable' => $sortable,
+'query' => $query,
+'bulk' => $bulk
+] %}
+
+{% endblock %}
+
+{% partial 'pagination.html', [
+'meta' => $meta,
+'query' => $query
+] %}

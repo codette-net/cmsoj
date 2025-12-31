@@ -1,0 +1,56 @@
+{% extends CMSOJ/Views/admin/main.html %}
+{% block title %} Create Account {% endblock %}
+
+{% block page %}
+<h1>Create Account</h1>
+
+<form method="POST" action="/admin/accounts/create">
+  <!-- include CMSOJ/Views/components/csrf.html  -->
+  {% component 'admin/form/input', [
+  'label' => 'Name',
+  'name' => 'name',
+  'id' => 'name',
+  'value' => $old['name'] ?? '',
+  'error' => $errors['name'] ?? null
+  ] %}
+
+  {% component 'admin/form/input', [
+  'label' => 'Display name',
+  'name' => 'display_name',
+  'id' => 'display_name',
+  'value' => $old['display_name'] ?? '',
+  'error' => $errors['display_name'] ?? null
+  ] %}
+
+  {% component 'admin/form/input', [
+  'label' => 'Email',
+  'name' => 'email',
+  'id' => 'email',
+  'type' => 'email',
+  'value' => $old['email'] ?? '',
+  'error' => $errors['email'] ?? null
+  ] %}
+
+  {% component 'admin/form/input', [
+  'label' => 'Password',
+  'name' => 'password',
+  'id' => 'password',
+  'type' => 'password',
+  'error' => $errors['password'] ?? null
+  ] %}
+
+  {% component 'admin/form/select', [
+  'label' => 'Role',
+  'name' => 'role',
+  'id' => 'role',
+  'options' => [
+  'Admin' => 'Admin',
+  'User' => 'User'
+  ],
+  'value' => $old['role'] ?? '',
+  'error' => $errors['role'] ?? null
+  ] %}
+
+  <button type="submit" class="btn btn-primary">Create Account</button>
+</form>
+{% endblock %}

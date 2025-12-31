@@ -1,0 +1,28 @@
+{% extends CMSOJ/Views/admin/main.html %}
+
+{% block title %} Settings {% endblock %}
+
+{% block page %}
+<h1>Settings</h1>
+
+<form method="POST" action="/admin/settings">
+
+    <label>Restaurant Name</label>
+    <input type="text" name="restaurant_name" value="{{ $settings['site_name'] }}">
+
+    <label>Contact Email</label>
+    <input type="email" name="contact_email" value="{{ $settings['contact_email'] }}">
+
+    <label>Default Language</label>
+    <select name="default_lang">
+        <option value="en" {{ $settings['default_lang']=='en'?'selected':'' }}>English</option>
+        <option value="pt" {{ $settings['default_lang']=='pt'?'selected':'' }}>Português</option>
+    </select>
+
+    <label>Reservation Max Persons</label>
+    <input type="number" name="reservation_max_persons" min="1" max="50" value="{{ $settings['reservation_max_persons'] }}">
+
+    <button type="submit">Save Settings</button>
+
+</form>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends CMSOJ/Views/admin/main.html %}
+
+{% block title %} Accounts {% endblock %}
+
+{% block page %}
+<h1>Edit Account</h1>
+<h2>{{ $account['display_name'] }} | {{ $account['email'] }}</h2>
+
+<form method="POST" action="/admin/accounts/edit/{{ $account['id'] }}">
+  <!-- include CMSOJ/Views/components/csrf.html  -->
+  {% component 'admin/form/input', [
+  'label' => 'Name',
+  'name' => 'name',
+  'id' => 'name',
+  'value' => $old['name'] ?? $account['name'] ?? '' ,
+  'error' => $errors['name'] ?? null
+  ] %}
+
+  {% component 'admin/form/input', [
+  'label' => 'Display name',
+  'name' => 'display_name',
+  'id' => 'display_name',
+  'value' => $old['display_name'] ?? $account['display_name'] ?? '',
+  'error' => $errors['display_name'] ?? null
+  ] %}
+
+{% component 'admin/form/input', [
+  'label' => 'Email',
+  'name' => 'email',
+  'id' => 'email',
+  'type' => 'email',
+  'value' => $old['email'] ?? $account['email'] ?? '',
+  'error' => $errors['email'] ?? null
+  ]
+  %}
+
+  {% component 'admin/form/input', [
+  'label' => 'Password',
+  'name' => 'password',
+  'id' => 'password',
+  'type' => 'password',
+  'placeholder' => 'Leave empty to keep current password',
+  'error' => $errors['password'] ?? null
+  ] %}
+  {% if (\CMSOJ\Helpers\Permissions::can('accounts.update_role')) : %}
+  {% component 'admin/form/select', [
+  'label' => 'Role',
+  'name' => 'role',
+  'id' => 'role',
+  'options' => [
+  'Admin' => 'Admin',
+  'User' => 'User'
+  ],
+  'value' => $old['role'] ?? $account['role'] ?? '',
+  'error' => $errors['role'] ?? null
+  ] %}
+  {% endif %}
+
+  <button type="submit" class="btn btn-primary">Update Account</button>
+</form>
+
+
+
+
+
+{% endblock %}

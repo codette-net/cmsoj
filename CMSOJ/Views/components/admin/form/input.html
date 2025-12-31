@@ -1,0 +1,16 @@
+<div class="form-group">
+    <label for="{{ $id }}">{{ $label }}</label>
+
+    <input
+        type="{{ $type ?? 'text' }}"
+        id="{{ $id }}"
+        name="{{ $name }}"
+        value="{{ $value ?? '' }}"
+        placeholder="{{ $placeholder ?? '' }}"
+        class="form-control {{ $error ? 'is-invalid' : '' }}"
+    >
+
+    <?php if (!empty($error)): ?>
+        <div class="invalid-feedback">{{ $error }}</div>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,30 @@
+{% extends CMSOJ/Views/admin/main.html %}
+
+{% block title %}
+    {{ $label ?? 'Confirm' }}
+{% endblock %}
+
+{% block page %}
+<h1>Confirm action</h1>
+
+<p><?= htmlspecialchars($confirm) ?></p>
+
+<form method="post">
+  <input type="hidden" name="_csrf" value="<?= $_csrf ?>">
+  <input type="hidden" name="action" value="<?= htmlspecialchars($action) ?>">
+  <input type="hidden" name="confirmed" value="1">
+
+  <?php foreach ($ids as $id): ?>
+    <input type="hidden" name="ids[]" value="<?= (int)$id ?>">
+  <?php endforeach; ?>
+
+  <button type="submit" class="btn btn-danger">
+    <?= htmlspecialchars($label) ?>
+  </button>
+
+  <a href="<?= htmlspecialchars($back) ?>" class="btn">
+    Cancel
+  </a>
+</form>
+
+{% endblock %}
