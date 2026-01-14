@@ -244,23 +244,32 @@ class Template
 	}
 
 	public static function partial(string $file, array $data = []): void
-	{
-		extract($data, EXTR_SKIP);
+{
+    extract($data, EXTR_SKIP);
 
-		// If no extension is provided, assume Views/partials/*.html
-		if (!str_contains($file, '.')) {
-			$file = 'CMSOJ/Views/partials/' . $file . '.html';
-		}
+    // If it's just a filename (no folders), assume partials folder
+    if (!str_contains($file, '/')) {
+        // If no extension, add .html
+        if (!str_contains($file, '.')) {
+            $file .= '.html';
+        }
+        $file = 'CMSOJ/Views/partials/' . $file;
+    } else {
+        // If path given but no extension, add .html
+        if (!str_contains(basename($file), '.')) {
+            $file .= '.html';
+        }
+    }
 
-		// Resolve absolute path
-		$path = self::resolvePath($file);
+    $path = self::resolvePath($file);
 
-		if (!file_exists($path)) {
-			throw new \Exception("Partial not found: {$file}");
-		}
+    if (!file_exists($path)) {
+        throw new \Exception("Partial not found: {$file}");
+    }
 
-		include $path;
-	}
+    include $path;
+}
+
 
 
 	public static function merge(array $a, array $b): array

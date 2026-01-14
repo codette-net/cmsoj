@@ -27,4 +27,32 @@ class Redirect
         header("Location: " . ($_SESSION['__redirect_back'] ?? '/admin'));
         exit;
     }
+    
+    public static function toReturnTo(?string $returnTo, string $fallback)
+    {
+        $url = $returnTo ?: $fallback;
+
+        // Important: prevent open redirects (only allow same-host relative paths)
+        $url = self::sanitizeInternalUrl($url, $fallback);
+
+        header('Location: ' . $url);
+        exit;
+    }
+
+    private static function sanitizeInternalUrl(string $url, string $fallback): string
+    {
+        $url = trim($url);
+
+        // allow only relative URLs starting with /
+        if ($url === '' || $url[0] !== '/') {
+            return $fallback;
+        }
+
+        // block protocol-relative //evil.com
+        if (str_starts_with($url, '//')) {
+            return $fallback;
+        }
+
+        return $url;
+    }
 }

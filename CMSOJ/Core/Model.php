@@ -6,6 +6,7 @@ abstract class Model
 {
     protected string $table;
     protected string $primaryKey = 'id';
+    public array $bulkUpdatable = [];
 
     public function db()
     {
@@ -131,17 +132,31 @@ abstract class Model
         return $stmt->execute([$id]);
     }
 
-
     public function bulkUpdate(array $ids, array $data): int
     {
-        if (empty($ids) || empty($data)) {
+        if (empty($ids) || !is_array($ids) || empty($data) || !is_array($data)) {
             return 0;
         }
 
-        $ids = array_map('intval', $ids);
+        // Normalize ids to ints and remove zeros/duplicates
+        $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
+        if (empty($ids)) {
+            return 0;
+        }
 
+        // OPTIONAL SAFETY: enforce allowed columns for bulk update
+        // If $bulkUpdatable is empty => allow all columns (keeps old behavior).
+        if (!empty($this->bulkUpdatable)) {
+            foreach (array_keys($data) as $col) {
+                if (!in_array($col, $this->bulkUpdatable, true)) {
+                    throw new \RuntimeException("Column not allowed for bulk update: {$col}");
+                }
+            }
+        }
+
+        // Build "col = ?" parts
         $set = implode(', ', array_map(
-            fn($col) => "$col = ?",
+            fn($col) => "{$col} = ?",
             array_keys($data)
         ));
 
@@ -149,7 +164,7 @@ abstract class Model
 
         $sql = "UPDATE {$this->table}
             SET {$set}
-            WHERE {$this->primaryKey} IN ($placeholders)";
+            WHERE {$this->primaryKey} IN ({$placeholders})";
 
         $stmt = $this->db()->prepare($sql);
         $stmt->execute([...array_values($data), ...$ids]);
@@ -159,6 +174,12 @@ abstract class Model
 
     public function bulkDelete(array $ids): int
     {
+        if (empty($ids) || !is_array($ids)) {
+            return 0;
+        }
+
+        // Normalize ids to ints and remove zeros/duplicates
+        $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
         if (empty($ids)) {
             return 0;
         }
@@ -166,10 +187,10 @@ abstract class Model
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
 
         $stmt = $this->db()->prepare(
-            "DELETE FROM {$this->table} WHERE {$this->primaryKey} IN ($placeholders)"
+            "DELETE FROM {$this->table} WHERE {$this->primaryKey} IN ({$placeholders})"
         );
 
-        $stmt->execute(array_map('intval', $ids));
+        $stmt->execute($ids);
 
         return $stmt->rowCount();
     }

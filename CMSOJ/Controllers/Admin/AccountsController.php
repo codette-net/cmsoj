@@ -11,9 +11,13 @@ use CMSOJ\Helpers\Redirect;
 use CMSOJ\Helpers\Flash;
 use CMSOJ\Helpers\Csrf;
 use CMSOJ\Helpers\BulkAction;
+use CMSOJ\Controllers\Admin\Concerns\Bulkable;
 
 class AccountsController
+
 {
+    use Bulkable;
+
     public function index()
     {
         if (Permissions::can('accounts.view_all')) {
@@ -228,45 +232,8 @@ class AccountsController
         ];
     }
 
-    public function bulk()
-    {
-        if (!Csrf::validate($_POST['_csrf'] ?? null)) {
-            http_response_code(403);
-            exit('Invalid CSRF token.');
-        }
-
-        $action = $_POST['action'] ?? '';
-        $ids    = $_POST['ids'] ?? [];
-
-        $actions = $this->bulkActions();
-
-        if (!isset($actions[$action])) {
-            Flash::set('error', 'Invalid bulk action.');
-            return Redirect::back()->send();
-        }
-
-        if (
-            BulkAction::requiresConfirmation($actions, $action)
-            && empty($_POST['confirmed'])
-        ) {
-            return Template::view('CMSOJ/Views/admin/bulk-confirm.html', [
-                'action'  => $action,
-                'label'   => $actions[$action]['label'],
-                'confirm' => $actions[$action]['confirm'],
-                'ids'     => $ids,
-                '_csrf'   => Csrf::token(),
-                'back'    => '/admin/accounts'
-            ]);
-        }
-        
-        $count = BulkAction::handle(
-            new Account(),
-            $actions,
-            $_POST
-        );
-
-        Flash::set('success', "{$count} accounts updated.");
-
-        return Redirect::back()->send();
-    }
+   public function bulk()
+  {
+    return $this->bulkEndpoint(new Account(), $this->bulkActions(), '/admin/accounts', 'accounts');
+  }
 }

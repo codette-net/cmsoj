@@ -14,6 +14,9 @@ class Permissions
                 'accounts.edit_self',
                 'accounts.update_role',
                 'accounts.delete',
+                'events.delete',
+                'events.edit'
+
             ],
             'user' => [
                 'accounts.edit_self'
