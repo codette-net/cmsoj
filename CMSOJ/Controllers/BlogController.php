@@ -1,17 +1,34 @@
 <?php
 namespace CMSOJ\Controllers;
 
-use CMSOJ\Models\Blog;
+use CMSOJ\Models\Post;
 use CMSOJ\Template;
 
 
 class BlogController {
-    public function index() {
+    public function index(): void {
+        $postModel = new Post();
+        $posts = $postModel->published();
+        
+        Template::view('CMSOJ/Views/blog/index.html', [
+            'title' => 'Blog',
+            'posts' => $posts
+        ]);
 
     }
 
-    public function show($id) {
-        // Implementation for displaying a specific blog post
+    public function show(string $slug): void {
+        $postModel = new Post();
+        $post = $postModel->findBySlug($slug);
+        if (!$post) {
+            Template::view('CMSOJ/Views/404.html', ['title' => 'Post Not Found']);
+            return;
+        }
+        Template::view('CMSOJ/Views/blog/post.html', [
+            'title' => $post->title,
+            'post' => $post
+        ]);
+        
     }
 
     public function create() {

@@ -1,0 +1,28 @@
+{% extends 'CMSOJ/Views/layout.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<main class="container">
+  <header>
+    <h1>Blog</h1>
+  </header>
+
+
+  <section aria-label="Posts">
+    <h2>Latest posts</h2>
+
+    {% if ($posts): %}
+      <ul class="post-list">
+        {% foreach($posts as $post): %}
+        <h3>
+          <a href="/blog/{{ $post['slug'] }}">{{ $post['title'] }}</a>
+        </h3>
+        {% endfor %}
+      </ul>
+    {% else: %}
+      <p>No posts yet.</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

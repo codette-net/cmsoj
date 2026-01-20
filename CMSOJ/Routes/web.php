@@ -3,6 +3,7 @@ namespace CMSOJ;
 use CMSOJ\Controllers\CalendarController;
 use CMSOJ\Controllers\ReservationController;
 use CMSOJ\Controllers\MenuController;
+use CMSOJ\Controllers\BlogController;
 use CMSOJ\Template;
 
 
@@ -30,18 +31,11 @@ $router->get('about', function() {
 ['title' => 'About']);
 });
 
-// Dynamic blog post: /blog/123
-$router->get('blog/{id}', function($id) {
-    Template::view('CMSOJ/Views/blog.html', ['id' => $id]);
-});
 
+$router->get('blog', [BlogController::class, 'index']);
+$router->get('blog/post/{slug}', [BlogController::class, 'show']);
+$router->get('blog/topic/{topicSlug}', [BlogController::class, 'topic']);
 
-$router->get('calendar', [CalendarController::class, 'handle']);
-
-$router->get('menu',[MenuController::class,'index']);
-
-// Reservation request
-$router->post('reservation',[ReservationController::class,'submit']);
 
 
 

@@ -7,8 +7,10 @@ use CMSOJ\Controllers\Admin\DashboardController;
 use CMSOJ\Controllers\Admin\AuthController;
 use CMSOJ\Controllers\Admin\AccountsController;
 use CMSOJ\Controllers\Admin\SettingsController;
-use CMSOJ\Controllers\Admin\MenuSectionController;
-use CMSOJ\Controllers\Admin\MenuItemController;
+
+use CMSOJ\Controllers\Admin\BlogController as AdminBlogController;
+use CMSOJ\Controllers\Admin\MediaController as AdminMediaController;
+
 
 /** @var Router $router */
 
@@ -38,74 +40,18 @@ $router->get('admin/profile', [AccountsController::class, 'profile'], AccountAut
 $router->get('admin/settings', [SettingsController::class, 'index'], AdminAuth::class);
 $router->post('admin/settings', [SettingsController::class, 'save'], AdminAuth::class);
 
-// restaurant menu sections management (protected)
+$router->get('admin/blog', [AdminBlogController::class, 'index'], AdminAuth::class);
+$router->get('admin/blog/new', [AdminBlogController::class, 'create'], AdminAuth::class);
+$router->post('admin/blog', [AdminBlogController::class, 'store'], AdminAuth::class);
 
-$router->get('admin/menu/sections',[MenuSectionController::class, 'index'], AdminAuth::class
-);
+$router->get('admin/blog/edit/{id}', [AdminBlogController::class, 'edit'], AdminAuth::class);
+$router->post('admin/blog/update/{id}', [AdminBlogController::class, 'update'], AdminAuth::class);
 
-$router->post(
-  'admin/menu/sections/delete/{id}',
-  [MenuSectionController::class, 'delete'],
-  AdminAuth::class
-);
+$router->post('admin/blog/delete/{id}', [AdminBlogController::class, 'delete'], AdminAuth::class);
 
-$router->post(
-  'admin/menu/sections/update',
-  [MenuSectionController::class, 'updateInline'],
-  AdminAuth::class
-);
+// Media (for TinyMCE + library)
+$router->get('admin/media', [AdminMediaController::class, 'index'], AdminAuth::class);
+$router->post('admin/media/upload', [AdminMediaController::class, 'upload'], AdminAuth::class);
 
-$router->get(
-    'admin/menu/sections/new',
-    [MenuSectionController::class, 'create'],
-    AdminAuth::class
-);
-
-$router->get(
-    'admin/menu/sections/edit/{id}',
-    [MenuSectionController::class, 'edit'],
-    AdminAuth::class
-);
-
-$router->post(
-    'admin/menu/sections/save',
-    [MenuSectionController::class, 'save'],
-    AdminAuth::class
-);
-
-
-$router->get(
-    'admin/menu/items',
-    [MenuItemController::class, 'index'],
-    AdminAuth::class
-);
-
-$router->get(
-    'admin/menu/items/create',
-    [MenuItemController::class, 'create'],
-    AdminAuth::class
-);
-
-$router->post(
-    'admin/menu/items/store',
-    [MenuItemController::class, 'store'],
-    AdminAuth::class
-);
-
-$router->get(
-    'admin/menu/items/edit/{id}',
-    [MenuItemController::class, 'edit'],
-    AdminAuth::class
-);
-
-$router->post(
-    'admin/menu/items/update/{id}',
-    [MenuItemController::class, 'update'],
-    AdminAuth::class
-);
-
-$router->post(
-    'admin/menu/items/update-inline',
-    [MenuItemController::class, 'updateInline'],
-    AdminAuth::class
-);
+// TinyMCE image upload endpoint (returns {location: "..."} )
+$router->post('admin/media/tinymce', [AdminMediaController::class, 'tinymceUpload'], AdminAuth::class);
