@@ -1,14 +1,14 @@
 {% extends 'CMSOJ/Views/layout.html' %}
 
-{% block title %}{{ post.title }}{% endblock %}
+{% block title %}{{ $post->title }}{% endblock %}
 
 {% block meta %}
 @parent
-{% if post.description %}
-  <meta name="description" content="{{ post.description }}">
+{% if ($post->description): %}
+  <meta name="description" content="{{ $post->description }}">
 {% endif %}
-{% if post.keywords %}
-  <meta name="keywords" content="{{ post.keywords }}">
+{% if ($post->keywords): %}
+  <meta name="keywords" content="{{ ($post->keywords) }}">
 {% endif %}
 {% endblock %}
 
@@ -16,19 +16,19 @@
 <main class="container">
   <article>
     <header>
-      <h1>{{ post.title }}</h1>
-      {% if post.published_at %}
-        <p><small>Published: {{ post.published_at }}</small></p>
+      <h1>{{ $post->title }}</h1>
+      {% if ($post->published_at): %}
+        <p><small>Published: {{ $post->published_at }}</small></p>
       {% endif %}
-      {% if post.introduction %}
+      {% if ($post->introduction): %}
         <div class="intro">
-          <p>{{ post.introduction }}</p>
+          <p>{{ $post->introduction }}</p>
         </div>
       {% endif %}
     </header>
 
     <section class="richtext">
-      {{ post.content }}
+      {{ $post->content }}
     </section>
   </article>
 </main>

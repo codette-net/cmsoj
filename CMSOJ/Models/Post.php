@@ -16,11 +16,17 @@ class Post extends Model {
     public $updated_at;
 
     public function findBySlug($slug) {
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT * FROM " . self::$table . " WHERE slug = :slug LIMIT 1");
-        $stmt->execute(['slug' => $slug]);
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
-        return $stmt->fetch();
+        $stmt = $this->db()->prepare("SELECT * FROM {$this->table} WHERE slug = ? LIMIT 1");
+        $stmt->execute([$slug]);
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($data) {
+            $post = new Post();
+            foreach ($data as $key => $value) {
+                $post->$key = $value;
+            }
+            return $post;
+        }
+        return null;
     }
 
     public function published() {

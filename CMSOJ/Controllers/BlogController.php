@@ -8,11 +8,12 @@ use CMSOJ\Template;
 class BlogController {
     public function index(): void {
         $postModel = new Post();
-        $posts = $postModel->published();
+        $result = $postModel->published();
         
         Template::view('CMSOJ/Views/blog/index.html', [
             'title' => 'Blog',
-            'posts' => $posts
+            'posts' => $result['data'],
+            'meta' => $result['meta'],
         ]);
 
     }
@@ -31,23 +32,4 @@ class BlogController {
         
     }
 
-    public function create() {
-        // Implementation for creating a new blog post
-    }
-
-    public function store() {
-        // Implementation for saving a new blog post
-    }
-
-    public function edit($id) {
-        // Implementation for editing an existing blog post
-    }
-
-    public function update($id) {
-        // Implementation for updating an existing blog post
-    }
-
-    public function delete($id) {
-        // Implementation for deleting a blog post
-    }
 }

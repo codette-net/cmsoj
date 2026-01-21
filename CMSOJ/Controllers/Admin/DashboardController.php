@@ -14,7 +14,6 @@ class DashboardController
     $totalAccounts = $db->query("SELECT COUNT(*) FROM accounts")->fetchColumn();
     $totalMessages = $db->query("SELECT COUNT(*) FROM messages")->fetchColumn();
     $unreadMessages = $db->query("SELECT COUNT(*) FROM messages WHERE status = 'Unread'")->fetchColumn();
-    $totalEvents = $db->query("SELECT COUNT(*) FROM events")->fetchColumn();
 
 
     return Template::view('CMSOJ/Views/admin/dashboard.html', [
@@ -23,7 +22,6 @@ class DashboardController
       'totalAccounts' => $totalAccounts,
       'totalMessages' => $totalMessages,
       'unreadMessages' => $unreadMessages,
-      'totalEvents' => $totalEvents,
     ]);
   }
 }

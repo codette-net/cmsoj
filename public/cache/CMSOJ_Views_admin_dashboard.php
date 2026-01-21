@@ -78,10 +78,7 @@
         <span><?= $unreadMessages ?></span>
     </div>
 
-    <div class="stat-box">
-        <h3>Total Events</h3>
-        <span><?= $totalEvents ?></span>
-    </div>
+
 
 </div>
 

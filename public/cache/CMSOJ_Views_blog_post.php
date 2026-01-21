@@ -2,10 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Manezinho | Blog </title>
+  <title>Manezinho | <?php echo $post->title; ?> </title>
   
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<?php if ($post->description): ?>
+  <meta name="description" content="<?php echo $post->description; ?>">
+<?php endif ?>
+<?php if ($post->keywords): ?>
+  <meta name="keywords" content="<?php echo ($post->keywords); ?>">
+<?php endif ?>
 
   
 <link rel="stylesheet" href='<?php echo \CMSOJ\Template::asset("/assets/css/main.css"); ?>' />
@@ -24,34 +32,23 @@
 
   
 <main class="container">
-  <header>
-    <h1>Blog</h1>
-  </header>
+  <article>
+    <header>
+      <h1><?php echo $post->title; ?></h1>
+      <?php if ($post->published_at): ?>
+        <p><small>Published: <?php echo $post->published_at; ?></small></p>
+      <?php endif ?>
+      <?php if ($post->introduction): ?>
+        <div class="intro">
+          <p><?php echo $post->introduction; ?></p>
+        </div>
+      <?php endif ?>
+    </header>
 
-
-  <section aria-label="Posts">
-    <h2>Latest posts</h2>
-
-    <?php if ($posts): ?>
-      <ul class="post-list">
-        <?php foreach($posts as $post): ?>
-          <li class="post-item">
-            <a href="/blog/post/<?php echo $post['slug']; ?>">
-              <h3><?php echo $post['title']; ?></h3>
-              <?php if ($post['published_at']): ?>
-                <p><small>Published: <?php echo $post['published_at']; ?></small></p>
-              <?php endif ?>
-              <?php if ($post['introduction']): ?>
-                <p><?php echo $post['introduction']; ?></p>
-              <?php endif ?>
-            </a>
-          </li>
-        <?php endforeach; ?>
-      </ul>
-    <?php else: ?>
-      <p>No posts yet.</p>
-    <?php endif ?>
-  </section>
+    <section class="richtext">
+      <?php echo $post->content; ?>
+    </section>
+  </article>
 </main>
 
 
@@ -65,6 +62,8 @@
 </body>
 
 </html>
+
+
 
 
 

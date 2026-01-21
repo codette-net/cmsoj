@@ -28,7 +28,11 @@ class Template
 
 		require $cached_file;
 
-		unset($_SESSION['errors'], $_SESSION['old']);
+		// unset($_SESSION['errors'], $_SESSION['old']);
+		// check if session is started before unsetting
+		if (session_status() === PHP_SESSION_ACTIVE) {
+			unset($_SESSION['errors'], $_SESSION['old']);
+		}
 	}
 
 	static function resolvePath($file)

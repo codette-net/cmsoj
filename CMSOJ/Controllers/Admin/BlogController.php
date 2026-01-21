@@ -1,11 +1,19 @@
 <?php
 
 namespace CMSOJ\Controllers\Admin;
-use CMSOJ\Models\Blog;
+use CMSOJ\Models\Post;
 use CMSOJ\Template;
 class BlogController {
-    public function index() {
+    public function index():void {
         // Implementation for listing blog posts in admin panel
+        $postModel = new Post();
+        $posts = $postModel->all();
+        Template::view('CMSOJ/Views/admin/blog/index.html', [
+            'title' => 'Manage Blog Posts',
+            'posts' => $posts
+        ]);
+
+        
     }
 
     public function create() {
