@@ -34,10 +34,10 @@
 
     <?php if ($posts): ?>
       <ul class="post-list">
-        <?php foreach($posts as $post): ?>
+        <?php foreach ($posts as $post): ?>
           <li class="post-item">
             <a href="/blog/post/<?php echo $post['slug']; ?>">
-              <h3><?php echo $post['title']; ?></h3>
+              <h3><?php echo htmlentities($post['title'], ENT_QUOTES, 'UTF-8') ?></h3>
               <?php if ($post['published_at']): ?>
                 <p><small>Published: <?php echo $post['published_at']; ?></small></p>
               <?php endif ?>

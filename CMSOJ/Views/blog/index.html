@@ -14,10 +14,10 @@
 
     {% if ($posts): %}
       <ul class="post-list">
-        {% foreach($posts as $post): %}
+        {% for post in posts %}
           <li class="post-item">
             <a href="/blog/post/{{ $post['slug'] }}">
-              <h3>{{ $post['title'] }}</h3>
+              <h3>{{{ $post['title'] }}}</h3>
               {% if ($post['published_at']): %}
                 <p><small>Published: {{ $post['published_at'] }}</small></p>
               {% endif %}
